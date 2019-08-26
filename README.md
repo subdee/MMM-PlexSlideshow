@@ -1,6 +1,6 @@
-# Module: Background Slideshow
+# Module: Plex Background Slideshow
 
-Show a slideshow of images in the background. Great for a photo frame from instead of a mirror.
+Show a slideshow of images in the background. Great for a photo frame from instead of a mirror, using photos from your PLEX Server
 
 The `MMM-BackgroundSlideshow` module is designed to display images fullscreen, one at a time on a fixed interval, from one or many directories. These images can be shown in order or at random, one directory at a time or all at time. The images can transition from one to the other and be shown with no edge (cover) or the enter image(contain).
 
@@ -33,11 +33,15 @@ Add the module to the modules array in the `config/config.js` file:
 modules: [
   {
     module: 'MMM-BackgroundSlideshow',
-    position: 'fullscreen_below',
+	position: 'fullscreen_below',
     config: {
-      imagePaths: ['modules/MMM-BackgroundSlideshow/exampleImages/'],
+	  plex: {
+		  hostname:"PlexServerName Or IP",
+		  port:32400,
+		  username:"",
+		  password:"",
+		},
       transitionImages: true,
-      randomizeImageOrder: true
     }
   }
 ];
@@ -76,7 +80,7 @@ The following notifications can be used:
 			<td><code>BACKGROUNDSLIDESHOW_PAUSE</code></td>
 			<td>Pause the timer for image changes<br>
 			</td>
-		</tr>		
+		</tr>
 		<tr>
 			<td><code>BACKGROUNDSLIDESHOW_PLAY</code></td>
 			<td>Change to the next image and start the timer for image changes<br>
@@ -98,13 +102,13 @@ The following properties can be configured:
 		</tr>
 	<thead>
 	<tbody>
-		<tr>
-			<td><code>imagePaths</code></td>
-			<td>Array value containing strings. Each string should be a path to a directory where image files can be found.<br>
-				<br><b>Example:</b> <code>['modules/MMM-BackgroundSlideshow/exampleImages/']</code>
-				<br>This value is <b>REQUIRED</b>
+	<tr>
+			<td><code>plex</code></td>
+			<td>plex connection settings<br>
+				<br>This value is <b>required</b>
 			</td>
 		</tr>
+
 		<tr>
 			<td><code>slideshowSpeed</code></td>
 			<td>Integer value, the length of time to show one image before switching to the next, in milliseconds.<br>
@@ -113,30 +117,7 @@ The following properties can be configured:
 				<br>This value is <b>OPTIONAL</b>
 			</td>
 		</tr>
-		<tr>
-			<td><code>randomizeImageOrder</code></td>
-			<td>Boolean value, if true will randomize the order of the images, if false will use an alphabetical sorting by filename.<br>
-				<br><b>Example:</b> <code>true</code>
-				<br><b>Default value:</b> <code>false</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-        <tr>
-			<td><code>recursiveSubDirectories</code></td>
-			<td>Boolean value, if true it will scan all sub-directories in the imagePaths.<br>
-				<br><b>Example:</b> <code>true</code>
-				<br><b>Default value:</b> <code>false</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-        <tr>
-			<td><code>validImageFileExtensions</code></td>
-			<td>String value, a list of image file extensions, seperated by commas, that should be included. Files found without one of the extensions will be ignored.<br>
-				<br><b>Example:</b> <code>'png,jpg'</code>
-				<br><b>Default value:</b> <code>'bmp,jpg,gif,png'</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
+
     <tr>
 			<td><code>transitionSpeed</code></td>
 			<td>Transition speed from one image to the other, transitionImages must be true. Must be a valid css transition duration.<br>

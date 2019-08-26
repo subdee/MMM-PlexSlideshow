@@ -15,6 +15,12 @@
 Module.register('MMM-BackgroundSlideshow', {
   // Default module config.
   defaults: {
+    plex: {
+      hostname:"localhost",
+      port: 32400,
+      username:"",
+      password:"",
+    },
     // an array of strings, each is a path to a directory with images
     imagePaths: ['modules/MMM-BackgroundSlideshow/exampleImages'],
     // the speed at which to switch between images, in milliseconds
@@ -86,7 +92,7 @@ Module.register('MMM-BackgroundSlideshow', {
       else if (notification === 'BACKGROUNDSLIDESHOW_NEXT'){ // Change to next image
         this.updateImage();
         if(this.timer){   // Restart timer only if timer was already running
-          this.resume();  
+          this.resume();
         }
 
       }

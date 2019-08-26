@@ -15,15 +15,17 @@
 // call in the required classes
 var NodeHelper = require('node_helper');
 var FileSystemImageSlideshow = require('fs');
+var PlexAPI = require("plex-api");
+var api = null;
 
 // the main module helper create
 module.exports = NodeHelper.create({
   // subclass start method, clears the initial config array
-  start: function() {
+  start: function () {
     //this.moduleConfigs = [];
   },
   // shuffles an array at random and returns it
-  shuffleArray: function(array) {
+  shuffleArray: function (array) {
     var currentIndex = array.length,
       temporaryValue,
       randomIndex;
@@ -37,22 +39,69 @@ module.exports = NodeHelper.create({
     return array;
   },
   // sort by filename attribute
-  sortByFilename: function(a, b) {
+  sortByFilename: function (a, b) {
     aL = a.toLowerCase();
     bL = b.toLowerCase();
     if (aL > bL) return 1;
     else return -1;
   },
   // checks there's a valid image file extension
-  checkValidImageFileExtension: function(filename, extensions) {
+  checkValidImageFileExtension: function (filename, extensions) {
     var extList = extensions.split(',');
     for (var extIndex = 0; extIndex < extList.length; extIndex++) {
       if (filename.toLowerCase().endsWith(extList[extIndex])) return true;
     }
     return false;
   },
+
+  gatherPlexImageList: function (config) {
+
+    if (api===null)
+    {
+      var options = {
+        hostname: config.plex.hostname !==null ? config.plex.hostname : "localhost",
+        port: config.plex.port ? config.plex.port  : 32400,
+        username: config.plex.username,
+        password: config.plex.password
+      };
+
+      console.log("Create PLEX Client : ", options);
+      api = new PlexAPI(options);
+      console.log("PLEX Client created");
+    }
+
+    var self = this;
+    var imageList = [];
+    return new Promise((resolve, reject) => {
+      // Get list of playlists
+      api.query('/playlists').then(function (results2) {
+
+        // Find playlist of photos which is Favorites
+        var r2 = results2.MediaContainer.Metadata.find(x => { return (x.specialPlaylistType == "favorites" && x.playlistType == "photo"); });
+
+        // Get all items in playlist
+        api.query(r2.key).then(function (results3) {
+          (results3.MediaContainer.Metadata).forEach(e => {
+            // Get Url to each item and save
+            var url = "http://" + config.plex.hostname + ":" + config.plex.port + e.Media[0].Part[0].key + "?X-Plex-Token=" + api.authToken;
+            console.log(url);
+            imageList.push(url);
+          });
+
+          // Sort and random order do not work yet.
+          // imageList = config.randomizeImageOrder
+          //      ? this.shuffleArray(imageList)
+          //      : imageList.sort(this.sortByFilename);
+
+          return resolve(imageList);
+        });
+      });
+    });
+  },
+
+
   // gathers the image list
-  gatherImageList: function(config) {
+  gatherImageList: function (config) {
     var self = this;
     // create an empty main image list
     var imageList = [];
@@ -84,22 +133,28 @@ module.exports = NodeHelper.create({
     }
   },
   // subclass socketNotificationReceived, received notification from module
-  socketNotificationReceived: function(notification, payload) {
+  socketNotificationReceived: function (notification, payload) {
     if (notification === 'BACKGROUNDSLIDESHOW_REGISTER_CONFIG') {
       // this to self
       var self = this;
+
       // get the image list
-      var imageList = this.gatherImageList(payload);
-      // build the return payload
-      var returnPayload = {
-        identifier: payload.identifier,
-        imageList: imageList
-      };
-      // send the image list back
-      self.sendSocketNotification(
-        'BACKGROUNDSLIDESHOW_FILELIST',
-        returnPayload
-      );
+      // var imageList = this.gatherImageList(payload);
+      var imageList = [];
+      this.gatherPlexImageList(payload).then((r) => {
+        imageList = r;
+
+        // build the return payload
+        var returnPayload = {
+          identifier: payload.identifier,
+          imageList: imageList
+        };
+        // send the image list back
+        self.sendSocketNotification(
+          'BACKGROUNDSLIDESHOW_FILELIST',
+          returnPayload
+        );
+      });
     }
   }
 });
