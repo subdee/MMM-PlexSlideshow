@@ -90,8 +90,8 @@ module.exports = NodeHelper.create({
 
           // Sort and random order do not work yet.
           // imageList = config.randomizeImageOrder
-          //      ? this.shuffleArray(imageList)
-          //      : imageList.sort(this.sortByFilename);
+          //           ? this.shuffleArray(imageList)
+          //           : imageList.sort(this.sortByFilename);
 
           return resolve(imageList);
         });
@@ -143,6 +143,10 @@ module.exports = NodeHelper.create({
       var imageList = [];
       this.gatherPlexImageList(payload).then((r) => {
         imageList = r;
+        if (config.randomizeImageOrder)
+        {
+          imageList = this.shuffleArray(imageList);
+        }
 
         // build the return payload
         var returnPayload = {
