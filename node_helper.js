@@ -1,14 +1,15 @@
 /* global Module */
 
-/* node_helper.js
+/* MMM-PlexSlideshow.js
  *
  * Magic Mirror
- * Module: MMM-BackgroundSlideshow
+ * Module: MMM-PlexSlideshow - Modifications by Peter Tewkesbury, Original code by Adam Moses and Darick Carpenter.
  *
  * Magic Mirror By Michael Teeuw http://michaelteeuw.nl
  * MIT Licensed.
  *
- * Module MMM-BackgroundSlideshow By Darick Carpenter
+ * Based Module MMM-BackgroundSlideShow by Darick Carpenter
+ * and that is based on MMM-ImageSlideShow by Adam Moses
  * MIT Licensed.
  */
 
@@ -87,12 +88,6 @@ module.exports = NodeHelper.create({
             console.log(url);
             imageList.push(url);
           });
-
-          // Sort and random order do not work yet.
-          // imageList = config.randomizeImageOrder
-          //           ? this.shuffleArray(imageList)
-          //           : imageList.sort(this.sortByFilename);
-
           return resolve(imageList);
         });
       });

@@ -1,18 +1,19 @@
 /* global Module */
 
-/* MMM-BackgroundSlideshow.js
+/* MMM-PlexSlideshow.js
  *
  * Magic Mirror
- * Module: MMM-BackgroundSlideshow
+ * Module: MMM-PlexSlideshow - Modifications by Peter Tewkesbury, Original code by Adam Moses and Darick Carpenter.
  *
  * Magic Mirror By Michael Teeuw http://michaelteeuw.nl
  * MIT Licensed.
  *
- * Module MMM-Slideshow By Darick Carpenter
+ * Based Module MMM-BackgroundSlideShow by Darick Carpenter
+ * and that is based on MMM-ImageSlideShow by Adam Moses
  * MIT Licensed.
  */
 
-Module.register('MMM-BackgroundSlideshow', {
+Module.register('MMM-PlexSlideshow', {
   // Default module config.
   defaults: {
     plex: {
@@ -21,16 +22,10 @@ Module.register('MMM-BackgroundSlideshow', {
       username:"",
       password:"",
     },
-    // an array of strings, each is a path to a directory with images
-    imagePaths: ['modules/MMM-BackgroundSlideshow/exampleImages'],
     // the speed at which to switch between images, in milliseconds
     slideshowSpeed: 10 * 1000,
     // if true randomize image order, otherwise do alphabetical
     randomizeImageOrder: false,
-    // if false each path with be viewed seperately in the order listed
-    recursiveSubDirectories: false,
-    // list of valid file extensions, seperated by commas
-    validImageFileExtensions: 'bmp,jpg,gif,png',
     // transition speed from one image to the other, transitionImages must be true
     transitionSpeed: '1s',
     // the sizing of the background image
@@ -59,13 +54,11 @@ Module.register('MMM-BackgroundSlideshow', {
   start: function() {
     // add identifier to the config
     this.config.identifier = this.identifier;
-    // ensure file extensions are lower case
-    this.config.validImageFileExtensions = this.config.validImageFileExtensions.toLowerCase();
     // set no error
     this.errorMessage = null;
-    if (this.config.imagePaths.length == 0) {
+    if (this.config.plex.hostname.length == 0 || this.config.plex.username.length==0 || this.config.plex.password.length==0) {
       this.errorMessage =
-        'MMM-BackgroundSlideshow: Missing required parameter.';
+        'MMM-PlexSlideshow: Missing required parameter.';
     } else {
       // create an empty image list
       this.imageList = [];
@@ -77,14 +70,14 @@ Module.register('MMM-BackgroundSlideshow', {
   // Define required scripts.
   getStyles: function() {
     // the css contains the make grayscale code
-    return ['BackgroundSlideshow.css'];
+    return ['PlexSlideshow.css'];
   },
   // generic notification handler
   notificationReceived: function(notification, payload, sender) {
     if (sender) {
       Log.log(this.name + " received a module notification: " + notification + " from sender: " + sender.name);
       if(notification === 'BACKGROUNDSLIDESHOW_IMAGE_UPDATE'){
-        Log.log("MMM-BackgroundSlideshow: Changing Background");
+        Log.log("MMM-PlexSlideshow: Changing Background");
         this.suspend();
         this.updateImage();
         this.resume();

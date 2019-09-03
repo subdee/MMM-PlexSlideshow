@@ -1,8 +1,8 @@
-# Module: Plex Background Slideshow
+# Module: Plex Favorites Slideshow
 
-Show a slideshow of images in the background. Great for a photo frame from instead of a mirror, using photos from your PLEX Server
+Show a slideshow of images in the background. Great for a photo frame from instead of a mirror, using photos marked as 'favorite' from your PLEX Server.
 
-The `MMM-BackgroundSlideshow` module is designed to display images fullscreen, one at a time on a fixed interval, from one or many directories. These images can be shown in order or at random, one directory at a time or all at time. The images can transition from one to the other and be shown with no edge (cover) or the enter image(contain).
+The `MMM-PlexSlideshow` module is designed to display images fullscreen, one at a time on a fixed interval, from your PLEX server. These images can be shown in order or at random. The images can transition from one to the other and be shown with no edge (cover) or the enter image(contain).
 
 Based on <a href="https://github.com/AdamMoses-GitHub/MMM-ImageSlideshow/blob/master/MMM-ImageSlideshow.js">MMM-ImageSlideshow</a>.
 
@@ -11,7 +11,7 @@ Based on <a href="https://github.com/AdamMoses-GitHub/MMM-ImageSlideshow/blob/ma
 
 ## Dependencies / Requirements
 
-This module requires no special dependencies. The only requirement is that the image directories you path to are fixed paths accessible to the Magic Mirror instance.
+This module requires that you have an accessable PLEX media server where your photos are stored, and that you have marked some of these photoes as favourites (The Heart icon).
 
 ## Operation
 
@@ -32,7 +32,7 @@ Add the module to the modules array in the `config/config.js` file:
 ```javascript
 modules: [
   {
-    module: 'MMM-BackgroundSlideshow',
+    module: 'MMM-PlexSlideshow',
 	position: 'fullscreen_below',
     config: {
 	  plex: {
@@ -41,21 +41,11 @@ modules: [
 		  username:"",
 		  password:"",
 		},
-      transitionImages: true,
+		transitionImages: true,
+
     }
   }
 ];
-```
-
-I also recommend adding the following to the custom.css to make the text a little brighter:
-
-```
-.normal,
-.dimmed,
-header,
-body {
-    color: #fff;
-}
 ```
 
 ## Notification options
