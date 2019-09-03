@@ -19,15 +19,28 @@ This module will take in a list of directory paths, one or more, containing imag
 
 Extra configurations include setting the amount of time an image is shown for, selecting which file extensions are valid, the transition speed from one image to another, the background sizing, whether or not to animate the transition from one to the other, the gradient used to make the text more readable, and the gradient opacity.
 
-## Using the module
+## Installing the module
 
-Use Git to download. Make sure Git is installed on your system. In the command line/terminal, go to the modules directory of the your Magic Mirror install. run: 'git clone https://github.com/darickc/MMM-BackgroundSlideshow.git'. The advantage of using Git is when there is an update, you can run 'git pull' and it will pull down all the updates. Magic Mirror can even let you know when there are updates.
+To install this module, from a SSH terminal
 
-Or
+```
+cd ~/MagicMirror/modules
+git clone https://github.com/PJTewkesbury/MMM-PlexSlideshow.git
+cd MMM-PlexSlideshow
+npm install
+```
 
-Download the zip file https://github.com/darickc/MMM-BackgroundSlideshow/archive/master.zip. Unzip contents into the modules directory of your Magic Mirror install. Rename the 'MMM-BackgroundSlideshow-master' folder to 'MMM-BackgroundSlideshow'.
+To update
 
-Add the module to the modules array in the `config/config.js` file:
+```
+cd ~/MagicMirror/modules/MMM-PlexSlideShow
+git pull
+npm install
+```
+
+## Configuration
+
+To configure the module, add the module to the modules array in the `config/config.js` file:
 
 ```javascript
 modules: [
@@ -42,7 +55,6 @@ modules: [
 		  password:"",
 		},
 		transitionImages: true,
-
     }
   }
 ];
