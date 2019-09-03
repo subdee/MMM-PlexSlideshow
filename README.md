@@ -64,81 +64,27 @@ modules: [
 
 The following notifications can be used:
 
-<table width="100%">
-	<!-- why, markdown... -->
-	<thead>
-		<tr>
-			<th>Notification</th>
-			<th width="100%">Description</th>
-		</tr>
-	<thead>
-	<tbody>
-		<tr>
-			<td><code>BACKGROUNDSLIDESHOW_NEXT</code></td>
-			<td>Change to the next image, restart the timer for image changes only if already running<br>
-			</td>
-		</tr>
-		<tr>
-			<td><code>BACKGROUNDSLIDESHOW_PAUSE</code></td>
-			<td>Pause the timer for image changes<br>
-			</td>
-		</tr>
-		<tr>
-			<td><code>BACKGROUNDSLIDESHOW_PLAY</code></td>
-			<td>Change to the next image and start the timer for image changes<br>
-			</td>
-		</tr>
-</table>
-
+| Notifications | Description |
+|---------------|-------------|
+BACKGROUNDSLIDESHOW_NEXT | Change to the next image, restart the timer for image changes only if already running|
+BACKGROUNDSLIDESHOW_PAUSE| Pause the timer for image changes|
+BACKGROUNDSLIDESHOW_PLAY | Change to the next image and start the timer for image changes|
 
 ## Configuration options
 
 The following properties can be configured:
 
-<table width="100%">
-	<!-- why, markdown... -->
-	<thead>
-		<tr>
-			<th>Option</th>
-			<th width="100%">Description</th>
-		</tr>
-	<thead>
-	<tbody>
-	<tr>
-			<td><code>plex</code></td>
-			<td>plex connection settings<br>
-				<br>This value is <b>required</b>
-			</td>
-		</tr>
+|Option |Description|
+|-------|-----------|
+|plex   | The connection details for your PLEX server. This is a require value. This is a array of values. See below. |
+|plex.hostname | The IP address or hostname of your PLEX server. This is a required value|
+|plex.port | This is the port number that your PLEX server runs on. This is required and it's value is normally 32400|
+|plex.username | The username of an account that can access the PLEX server.  This is a required value|
+|plex.password | The password for the username of an account that can access the PLEX server. This is a required value|
+|slideshowSpeed|Integer value, the length of time to show one image before switching to the next, in milliseconds.  This defaults to a value of 10000ms (Which is 10 seconds). This value is __OPTIONAL__|
+|transitionSpeed|Transition speed from one image to the other, transitionImages must be true. Must be a valid css transition duration. Eg. '2s'. This value is __OPTIONAL__|
+|backgroundSize|The sizing of the background image. Values can be: cover: Resize the background image to cover the entire container, even if it has to stretch the image or cut a little bit off one of the edges. contain: Resize the background image to make sure the image is fully visible. Default value:'cover'. This value is __OPTIONAL___|
 
-		<tr>
-			<td><code>slideshowSpeed</code></td>
-			<td>Integer value, the length of time to show one image before switching to the next, in milliseconds.<br>
-				<br><b>Example:</b> <code>6000</code> for 6 seconds
-				<br><b>Default value:</b> <code>10000</code> or 10 seconds
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-
-    <tr>
-			<td><code>transitionSpeed</code></td>
-			<td>Transition speed from one image to the other, transitionImages must be true. Must be a valid css transition duration.<br>
-				<br><b>Example:</b> <code>'2s'</code>
-				<br><b>Default value:</b> <code>'1s'</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-    <tr>
-			<td><code>backgroundSize</code></td>
-			<td>The sizing of the background image. Values can be:<br>
-        cover: Resize the background image to cover the entire container, even if it has to stretch the image or cut a little bit off one of the edges.<br>
-        contain: Resize the background image to make sure the image is fully visible<br>
-				<br><b>Example:</b> <code>'contain'</code>
-				<br><b>Default value:</b> <code>'cover'</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-    <tr>
 			<td><code>transitionImages</code></td>
 			<td>Transition from one image to the other (may be a bit choppy on slower devices, or if the images are too big).<br>
 				<br><b>Example:</b> <code>true</code>
