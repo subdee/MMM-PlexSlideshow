@@ -15,9 +15,9 @@ This module requires that you have an accessable PLEX media server where your ph
 
 ## Operation
 
-This module will take in a list of directory paths, one or more, containing image files. The module will display those images in either alphabetical or random order, across either each path one at time or across all the paths at once. Once all the images have been shown, it will loop back and start again.
+This module will log into the specified PLEX Media Server and locate the Favorites Photo Album and display the images. The module will display those images in either alphabetical or random order. Once all the images have been shown, it will loop back and start again.
 
-Extra configurations include setting the amount of time an image is shown for, selecting which file extensions are valid, the transition speed from one image to another, the background sizing, whether or not to animate the transition from one to the other, the gradient used to make the text more readable, and the gradient opacity.
+Extra configurations include setting the amount of time an image is shown for, the transition speed from one image to another, the background sizing, whether or not to animate the transition from one to the other, the gradient used to make the text more readable, and the gradient opacity.
 
 ## Installing the module
 
