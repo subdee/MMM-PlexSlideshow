@@ -81,57 +81,10 @@ The following properties can be configured:
 |plex.port | This is the port number that your PLEX server runs on. This is required and it's value is normally 32400|
 |plex.username | The username of an account that can access the PLEX server.  This is a required value|
 |plex.password | The password for the username of an account that can access the PLEX server. This is a required value|
-|slideshowSpeed|Integer value, the length of time to show one image before switching to the next, in milliseconds.  This defaults to a value of 10000ms (Which is 10 seconds). This value is __OPTIONAL__|
-|transitionSpeed|Transition speed from one image to the other, transitionImages must be true. Must be a valid css transition duration. Eg. '2s'. This value is __OPTIONAL__|
-|backgroundSize|The sizing of the background image. Values can be: cover: Resize the background image to cover the entire container, even if it has to stretch the image or cut a little bit off one of the edges. contain: Resize the background image to make sure the image is fully visible. Default value:'cover'. This value is __OPTIONAL___|
-
-			<td><code>transitionImages</code></td>
-			<td>Transition from one image to the other (may be a bit choppy on slower devices, or if the images are too big).<br>
-				<br><b>Example:</b> <code>true</code>
-				<br><b>Default value:</b> <code>false</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-    <tr>
-			<td><code>gradient</code></td>
-			<td>The vertical gradient to make the text more visible.  Enter gradient stops as an array.<br>
-				<br><b>Example:</b> <code>[
-      "rgba(0, 0, 0, 0.75) 0%",
-      "rgba(0, 0, 0, 0) 40%"
-    ]</code>
-				<br><b>Default value:</b> <code>[
-      "rgba(0, 0, 0, 0.75) 0%",
-      "rgba(0, 0, 0, 0) 40%",
-      "rgba(0, 0, 0, 0) 80%",
-      "rgba(0, 0, 0, 0.75) 100%"
-    ]</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-		<tr>
-			<td><code>horizontalGradient</code></td>
-			<td>The horizontal gradient to make the text more visible.  Enter gradient stops as an array.<br>
-				<br><b>Example:</b> <code>[
-      "rgba(0, 0, 0, 0.75) 0%",
-      "rgba(0, 0, 0, 0) 40%"
-    ]</code>
-				<br><b>Default value:</b> <code>[
-      "rgba(0, 0, 0, 0.75) 0%",
-      "rgba(0, 0, 0, 0) 40%",
-      "rgba(0, 0, 0, 0) 80%",
-      "rgba(0, 0, 0, 0.75) 100%"
-    ]</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-    <tr>
-			<td><code>gradientDirection</code></td>
-			<td>The direction of the gradient<br>
-				<br><b>Example:</b> <code>'horizontal'</code>
-				<br><b>Default value:</b> <code>'vertical'</code>
-				<br><b>Possible values:</b> <code>'vertical', 'horizontal', 'both'</code>
-				<br>This value is <b>OPTIONAL</b>
-			</td>
-		</tr>
-    </tbody>
-</table>
+|slideshowSpeed|Integer value, the length of time to show one image before switching to the next, in milliseconds. <br> Default value: 10000 (Which is 10 seconds). <br>This value is __OPTIONAL__|
+|transitionSpeed|Transition speed from one image to the other, transitionImages must be true. Must be a valid css transition duration.<br> Example: '2s'. <br>This value is __OPTIONAL__|
+|backgroundSize|The sizing of the background image. Values can be: <ul><li>cover: Resize the background image to cover the entire container, even if it has to stretch the image or cut a little bit off one of the edges. </il><li>contain: Resize the background image to make sure the image is fully visible.</il></ul> Default value:'cover'. This value is __OPTIONAL___|
+|transitionImages|Transition from one image to the other (may be a bit choppy on slower devices, or if the images are too big).<br>Example: true<br>Default value:false <br>This value is __OPTIONAL__|
+|gradient|The vertical gradient to make the text more visible.  Enter gradient stops as an array. <br><br> Example: [ <br>"rgba(0, 0, 0, 0.75) 0%",<br>"rgba(0, 0, 0, 0) 40%"<br>]<br><br>Default value:__[<br>"rgba(0, 0, 0, 0.75) 0%",<br>"rgba(0, 0, 0, 0) 40%",<br>"rgba(0, 0, 0, 0) 80%",<br>"rgba(0, 0, 0, 0.75) 100%"<br>]<br>This value is __OPTIONAL__|
+|horizontalGradient|The horizontal gradient to make the text more visible.  Enter gradient stops as an array.<br><br>Example:["rgba(0, 0, 0, 0.75) 0%",<br>"rgba(0, 0, 0, 0) 40%"<br>]<br>Default value:___[<br>"rgba(0, 0, 0, 0.75) 0%",<br>"rgba(0, 0, 0, 0) 40%",<br>"rgba(0, 0, 0, 0) 80%",<br>"rgba(0, 0, 0, 0.75) 100%"<br>]<br>This value is __OPTIONAL__|
+|gradientDirection|The direction of the gradient<br>Possible values:</b> 'vertical', 'horizontal', 'both'<br><br>Default value:</b>'vertical'<br>This value is __OPTIONAL__|
