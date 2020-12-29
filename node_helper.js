@@ -83,7 +83,7 @@ module.exports = NodeHelper.create({
         api.query(r2.key).then(function (results3) {
           (results3.MediaContainer.Metadata).forEach(e => {
             // Get Url to each item and save
-            var url = "http://" + config.plex.hostname + ":" + config.plex.port + e.Media[0].Part[0].key + "?X-Plex-Token=" + api.authToken;
+            var url = 'http://' + config.plex.hostname + ':' + config.plex.port + e.Media[0].Part[0].key
             console.log(url);
             imageList.push(url);
           });
